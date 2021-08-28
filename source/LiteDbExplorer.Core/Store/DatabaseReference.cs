@@ -33,7 +33,7 @@ namespace LiteDbExplorer.Core
 
             var connectionString = options.GetConnectionString();
 
-            LiteDatabase = new LiteDatabase(connectionString, log: GetLogger());
+            LiteDatabase = new LiteDatabase(connectionString);
 
             UpdateCollections();
 
@@ -50,8 +50,8 @@ namespace LiteDbExplorer.Core
 
         public int UserVersion
         {
-            get => LiteDatabase.Engine.UserVersion;
-            set => LiteDatabase.Engine.UserVersion = (ushort) value;
+            get => LiteDatabase.UserVersion;
+            set => LiteDatabase.UserVersion = value;
         }
 
         public ObservableCollection<CollectionReferenceLookup> CollectionsLookup { get; private set; }
@@ -159,22 +159,24 @@ namespace LiteDbExplorer.Core
 
         public long ShrinkDatabase()
         {
-            return LiteDatabase.Shrink();
+            return LiteDatabase.Rebuild();
         }
 
         public long ShrinkDatabase(string password)
         {
-            return LiteDatabase.Shrink(password);
+            var options = new LiteDB.Engine.RebuildOptions();
+            options.Password = password;
+            return LiteDatabase.Rebuild(options);
         }
 
         public IList<BsonValue> RunCommand(string command)
         {
-            return LiteDatabase.Engine.Run(command);
+            return LiteDatabase.Execute(command).ToArray();
         }
 
         public BsonDocument InternalDatabaseInfo()
         {
-            return LiteDatabase.Engine.Info();
+            return LiteDatabase.GetCollection("$database").FindOne(Query.All());
         }
 
         public void BeforeDispose()
@@ -191,22 +193,23 @@ namespace LiteDbExplorer.Core
 
         public static bool IsDbPasswordProtected(string path)
         {
-            using (var db = new LiteDatabase(path))
+            try
             {
-                try
+                using (var db = new LiteDatabase(path))
                 {
+
                     db.GetCollectionNames();
                     return false;
                 }
-                catch (LiteException e)
+            }
+            catch (LiteException e)
+            {
+                if (e.Message == "This data file is encrypted and needs a password to open")
                 {
-                    if (e.ErrorCode == LiteException.DATABASE_WRONG_PASSWORD || e.Message.Contains("password"))
-                    {
-                        return true;
-                    }
-
-                    throw;
+                    return true;
                 }
+
+                throw;
             }
         }
 
@@ -270,17 +273,7 @@ namespace LiteDbExplorer.Core
                 referenceCollection.OnReferenceChanged(action, referenceCollection);
             }
         }
-
-        private Logger GetLogger()
-        {
-            if (_enableLog)
-            {
-                return new Logger(Logger.FULL, log => { Log.ForContext("DatabaseName", Name).Information(log); });
-            }
-
-            return null;
-        }
-
+        
         private void UpdateCollections()
         {
             // TODO: Bind database tree and lazy load CollectionReference

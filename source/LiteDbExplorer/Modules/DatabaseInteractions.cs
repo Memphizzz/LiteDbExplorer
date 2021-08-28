@@ -15,6 +15,7 @@ using Enterwell.Clients.Wpf.Notifications;
 using Forge.Forms;
 using LiteDbExplorer.Core;
 using LiteDB;
+using LiteDB.Engine;
 using LiteDbExplorer.Modules.Shared;
 using LiteDbExplorer.Presentation;
 using OfficeOpenXml;
@@ -84,7 +85,7 @@ namespace LiteDbExplorer.Modules
 
             using (var stream = new FileStream(maybeFileName.Value, System.IO.FileMode.Create))
             {
-                LiteEngine.CreateDatabase(stream);
+                new LiteDatabase(stream);
             }
 
             await OpenDatabase(maybeFileName.Value).ConfigureAwait(false);
@@ -191,7 +192,7 @@ namespace LiteDbExplorer.Modules
 
         protected virtual async Task OpenDatabaseExceptionHandler(LiteException liteException, string path, string password = "")
         {
-            if (liteException.ErrorCode == LiteException.DATABASE_WRONG_PASSWORD)
+            if (liteException.Message == "Invalid password")
             {
                 if (!string.IsNullOrEmpty(password))
                 {
@@ -524,7 +525,7 @@ namespace LiteDbExplorer.Modules
         {
             var documentAggregator = new DocumentReferenceAggregator(documents);
             
-            Clipboard.SetData(DataFormats.Text, documentAggregator.Serialize(true, false));
+            Clipboard.SetData(DataFormats.Text, documentAggregator.Serialize());
 
             return Task.FromResult(Result.Ok());
         }
@@ -626,7 +627,7 @@ namespace LiteDbExplorer.Modules
                     var documentAggregator = new DocumentReferenceAggregator(documents);
                     using (var writer = new StreamWriter(maybeJsonFileName.Value))
                     {
-                        documentAggregator.Serialize(writer, true, false);
+                        documentAggregator.Serialize(writer);
                     }
                 }
             }

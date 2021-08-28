@@ -338,7 +338,7 @@
                                        TextTrimming="CharacterEllipsis"
                                        Style="{StaticResource MaterialDesignSubheadingTextBlock}" />
                             <TextBlock Grid.Column="1" Grid.Row="1"
-                                       Text="Open LiteDB v4 database file" Padding="0,5"
+                                       Text="Open LiteDB v5 database file" Padding="0,5"
                                        TextWrapping="Wrap"
                                        Style="{StaticResource MaterialDesignCaptionTextBlock}" />
                         </Grid>
@@ -361,7 +361,7 @@
                                        TextTrimming="CharacterEllipsis"
                                        Style="{StaticResource MaterialDesignSubheadingTextBlock}" />
                             <TextBlock Grid.Column="1" Grid.Row="1"
-                                       Text="Create and open new LiteDB v4 database" Padding="0,5"
+                                       Text="Create and open new LiteDB v5 database" Padding="0,5"
                                        TextWrapping="Wrap"
                                        Style="{StaticResource MaterialDesignCaptionTextBlock}" />
                         </Grid>
