@@ -96,7 +96,7 @@
                                    ViewportSize="{TemplateBinding ViewportWidth}"
                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-
+                                    
                         <ScrollBar Name="PART_VerticalScrollBar"
                                    Grid.Row="0" Grid.Column="1"
                                    Maximum="{TemplateBinding ScrollableHeight}"

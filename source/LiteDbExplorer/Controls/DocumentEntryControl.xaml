@@ -141,9 +141,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <UniformGrid Grid.Column="1" Grid.Row="0" Rows="1">
-                    <Grid>
-                        <Grid x:Name="ListResizeRefGrid" VerticalAlignment="Top">
+                <UniformGrid Grid.Column="1" Grid.Row="0" Rows="1" >
+                    <Grid >
+                        <Grid x:Name="ListResizeRefGrid" VerticalAlignment="Top" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" MinWidth="100" />
                                 <ColumnDefinition Width="1.6*" MinWidth="100" />

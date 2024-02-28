@@ -6,7 +6,7 @@
                  xmlns:local="clr-namespace:LiteDbExplorer.Windows"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  mc:Ignorable="d"
-                 Width="640" Height="600" MaxHeight="1000" SizeToContent="Height" 
-                 WindowStartupLocation="CenterScreen"
+                 Width="640" Height="600" SizeToContent="Height" 
+                 WindowStartupLocation="CenterScreen"       
                  Style="{StaticResource DialogWindowStyle}">
 </mah:MetroWindow>

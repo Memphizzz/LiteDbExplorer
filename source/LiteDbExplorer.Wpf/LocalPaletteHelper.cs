@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
-using MaterialDesignThemes.Wpf;
 
 namespace LiteDbExplorer.Wpf
 {
