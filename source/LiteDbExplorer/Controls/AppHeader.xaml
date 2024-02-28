@@ -17,7 +17,7 @@
         <Border Margin="8,7" Padding="8,3" CornerRadius="3" VerticalAlignment="Bottom"
                 Background="{DynamicResource AccentColorBrush}">
             <TextBlock FontWeight="Normal" 
-                       Text="Preview" Foreground="White" 
+                       Text="Preview V5" Foreground="White" 
                        Style="{StaticResource MaterialDesignCaptionTextBlock}"
                        SnapsToDevicePixels="True"/>
         </Border>
