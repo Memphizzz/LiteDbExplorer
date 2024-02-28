@@ -10,7 +10,7 @@ namespace LiteDbExplorer.Core
         {
         }
 
-        protected override IEnumerable<DocumentReference> GetAllItem(LiteCollection<BsonDocument> liteCollection)
+        protected override IEnumerable<DocumentReference> GetAllItem(ILiteCollection<BsonDocument> liteCollection)
         {
             return LiteCollection.FindAll().Select(bsonDocument => new FileDocumentReference(bsonDocument, this));
         }
@@ -20,22 +20,8 @@ namespace LiteDbExplorer.Core
             Database.LiteDatabase.FileStorage.Delete(document.LiteDocument["_id"]);
             Items.Remove(document);
         }
-
-        public DocumentReference AddFile(string id, string path)
-        {
-            var file = Database.LiteDatabase.FileStorage.Upload(id, path);
-            var newDoc = new DocumentReference(file.AsDocument, this);
-            Items.Add(newDoc);
-            return newDoc;
-        }
-
-        public void SaveFile(DocumentReference document, string path)
-        {
-            var file = GetFileObject(document);
-            file.SaveAs(path);
-        }
-
-        public LiteFileInfo GetFileObject(DocumentReference document)
+        
+        public LiteFileInfo<string> GetFileObject(DocumentReference document)
         {
             return Database.LiteDatabase.FileStorage.FindById(document.LiteDocument["_id"]);
         }

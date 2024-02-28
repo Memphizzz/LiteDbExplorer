@@ -137,7 +137,7 @@ namespace LiteDbExplorer.Modules.Database
 
             DatabaseFileInfo = databaseFileInfo;
 
-            MetadataJson = JsonSerializer.Serialize(engineInfoDocument, true, false);
+            MetadataJson = JsonSerializer.Serialize(engineInfoDocument);
         }
 
     }

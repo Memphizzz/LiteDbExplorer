@@ -91,7 +91,7 @@ namespace LiteDbExplorer.Modules.Shared
             _newIdLookup.IdType = IdType;
             NewId = _newIdLookup.NewId;
             IdIsValid = true;
-            _newIdString = NewId.AsString;
+            _newIdString = NewId.ToString();
             OnPropertyChanged(nameof(NewIdString));
         }
 

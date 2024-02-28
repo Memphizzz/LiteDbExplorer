@@ -69,12 +69,12 @@ namespace LiteDbExplorer.Core
 
         public string Serialize(bool pretty = false, bool decoded = true)
         {
-            return decoded ? LiteDocument.SerializeDecoded(true) : JsonSerializer.Serialize(LiteDocument, pretty, false);
+            return decoded ? LiteDocument.SerializeDecoded(true) : JsonSerializer.Serialize(LiteDocument);
         }
 
         public void Serialize(TextWriter writer, bool pretty = false)
         {
-            JsonSerializer.Serialize(LiteDocument, writer, pretty, false);
+            JsonSerializer.Serialize(LiteDocument, writer);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace LiteDbExplorer.Wpf
             SetLightDark(isDark);
         }
 
+        [Obsolete]
         public override void SetLightDark(bool isDark)
         {
             if (!TryFindAndReplaceMergedDictionary(

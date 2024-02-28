@@ -7,7 +7,7 @@ namespace LiteDbExplorer.Core
 
         public static string SerializeDecoded(this BsonValue bsonValue, bool pretty = false)
         {
-            var json = JsonSerializer.Serialize(bsonValue, pretty, false);
+            var json = JsonSerializer.Serialize(bsonValue);
 
             return EncodingExtensions.DecodeEncodedNonAsciiCharacters(json);
         }
