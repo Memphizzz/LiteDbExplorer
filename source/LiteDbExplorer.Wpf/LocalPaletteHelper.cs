@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace LiteDbExplorer.Wpf
 {
@@ -12,6 +13,7 @@ namespace LiteDbExplorer.Wpf
             SetLightDark(isDark);
         }
 
+        [Obsolete]
         public override void SetLightDark(bool isDark)
         {
             if (!TryFindAndReplaceMergedDictionary(
