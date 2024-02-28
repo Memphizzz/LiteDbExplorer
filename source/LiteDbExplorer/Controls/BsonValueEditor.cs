@@ -358,7 +358,7 @@ namespace LiteDbExplorer.Controls
             {
                 var text = new TextBox
                 {
-                    Text = editorContext.BindingValue.AsString,
+                    Text = editorContext.BindingValue.ToString(),
                     IsReadOnly = true,
                     VerticalAlignment = VerticalAlignment.Center,
                 };
